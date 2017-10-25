@@ -1,2 +1,2 @@
-# remote-prework-js
-A repository of demo code for students following along with my online javascript video series.
+# Remote Prework - JavaScript Fundamentals
+A repository of demo code for those following along with my online javascript video series.
