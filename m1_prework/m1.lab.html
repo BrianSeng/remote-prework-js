@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        .text-container {
+            background-color: lightgray;
+            width: 50%;
+            float: left;
+        }
+
+        .img-container {
+            background-color: lightgreen;
+            width: 50%;
+            float: right;
+            text-align: center;
+        }
+
+        p {
+            color: red;
+        }
+
+        .logoImg {
+            width: 150px;
+            height: 150px;
+        }
+
+        #btnAppend{
+            height: 30px;
+            background-color: dodgerblue;
+        }
+
+        #btnToggleHide {
+            height: 30px;
+            background-color: orange;
+        }
+
+        #btnContainer{
+            margin-bottom:10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="btnContainer">
+        <button id="btnAppend" type="button">Click me to append to DOM!</button>
+        <button id="btnToggleHide" type="button">Click me to toggle hide/show!</button>
+    </div>
+    <div class="text-container">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="img-container">
+        <img class="logoImg" src="https://divwebapp.s3-us-west-2.amazonaws.com/C8E07271-A4E1-472E-B82B-541BC56A87AC" />
+    </div>
+
+
+
+    <!--This is an HTML comment. it will not be seen on the page-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        //This is a js comment, it will not be parsed
+        //Read documentation on $(document).ready here:
+        //https://learn.jquery.com/using-jquery-core/document-ready/
+
+        $(document).ready(function ()
+        {
+            //wiring up buttons to event handler functions
+            //only needs to be linked once, done so on document ready status
+            $("#btnAppend").on("click", appendToDom);
+            $("#btnToggleHide").on("click", toggleHide);
+        });
+
+        //hoisted named functions below
+        function appendToDom()
+        {
+            $("div.text-container").append("<h1>I'M NEWLY APPENDED TEXT!!!</h1>");
+            $("div.img-container").append('<img class="logoImg" src="https://divwebapp.s3-us-west-2.amazonaws.com/C8E07271-A4E1-472E-B82B-541BC56A87AC" />');
+        }
+
+        function toggleHide()
+        {
+            $("div.text-container, div.img-container").fadeToggle();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    
+</head>
+<body>
+    <!--THIS HERE IS A COMMENT THAT WON'T BE SEEN ON THE PAGE-->
+    <h1>JavaScript Intro</h1>
+
+    <script type="text/javascript">
+        var age = 26;
+        var salary; //this unassigned variable
+        var firstName = "Joe";
+        salary = 65000;
+        age = 50
+        //console.log("Hello world");
+        //console.log(age);
+
+        function multiply(number1, number2)
+        {
+            return number1 * number2;
+        }
+
+        var product = multiply(age, salary);
+
+        //console.log(product)
+
+        //named function declaration
+        function getFullName(firstName, lastName) 
+        {
+            var fullName = firstName + " " + lastName;
+            console.log(fullName);
+        }
+
+        //function expression
+        var ageCheck = function (name, age) {              // If/else if/else statement
+            if(age == 21) //evaluates to true
+            {
+                console.log(name + ", go get a beer")
+            }
+            else if (age != 27) //not equal to !=
+            {
+                console.log(name + ", you are not 27");
+            }
+            else if (age > 18 && age < 25)
+            {
+                console.log(name + ", you're in the golden years");
+            }
+            else if (!age == 50)  //Looks for a falsey value of age to equal 50 
+            {                     //(basically impossible to pass condition as true)
+                console.log(name + ", you are not 50");
+            }
+            else if(age < 18)
+            {
+                console.log(name + ", you are not eligible")
+            }
+            else if(age > 50)
+            {
+                console.log(name + ", some would say you are too eligible");
+            }
+            else
+            {
+                console.log(name + ", you are eligible");
+            }
+        };
+
+        //Truthy vs Falsey examples
+        var truthy1 = "0"    //string
+            , truthy2 = "a string"    //string
+            , truthy3 = "false"    //string
+            , truthy4 = 23    //number (data type: integer)
+            , truthy5 = []    //empty array
+            , truthy6 = {}    //empty object
+            , truthy7 = function () { } //empty function
+            , truthy8 = true;  //data type: boolean - true
+
+        var falsey1 = 0    //zero
+            , falsey2 = ""    //empty string
+            , falsey3 = null   //data type: null
+            , falsey4    //undefined
+            , falsey5 = NaN  //Not a Number
+            , falsey6 = false;  //data type: boolean - false
+
+        //FORMAL INVOKING of f(x)
+        //ageCheck("Brian", 27);
+
+        //Immediately Invoked Function Expression (IIFE)
+        (function ()
+        {
+            if (falsey4)
+            {
+                console.log("THIS VAR WAS TRUTHY!");
+            }
+            else
+            {
+                console.log("THIS VAR WAS Falsey!");
+            }
+        })();
+
+        
+    </script>
+</body>
+</html>
