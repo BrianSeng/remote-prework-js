@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Meeting 2 Form Lab</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style type="text/css">
+        #formContainer {
+            background-color: lightgray;
+            /*clockwise: top | right | middle| left*/
+            padding: 20px 50px 50px 50px;
+        }
+
+        /*A very specific CSS selector*/
+        h2.text-center.text-primary {
+            margin-top: 0px;
+        }
+
+        #preview {
+            color: white;
+            min-height: 300px;
+            padding: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Documentation on Bootstrap's grid system: https://getbootstrap.com/docs/3.3/examples/grid/ -->
+    <div id="preview" class="col-md-12 bg-primary">
+        <h1>Preview:</h1>
+
+        <!-- h3 tags inherit text-center from parent div -->
+        <div class="text-center">
+            <h3>Name:</h3><span id="nameLanding"></span>
+            <h3>Email:</h3><span id="emailLanding"></span>
+            <h3>Password:</h3><span id="passwordLanding"></span>
+        </div>
+    </div>
+
+    <div id="formContainer" class="col-md-6 col-md-offset-3">
+
+        <h2 class="text-center text-primary">Register Form Lab</h2>
+
+        <!-- Modified Form from BootStrap's docs page: https://getbootstrap.com/docs/3.3/css/#forms -->
+        <form id="formRegister">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input id="email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Email..." />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Password..." />
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name"
+                       type="text"
+                       class="form-control"
+                       placeholder="Full name..." />
+            </div>
+            <div class="form-group">
+                <input id="agree"
+                       type="checkbox"
+                       name="termsAccepted"
+                       value="true"> I agree with the Terms & Conditions.
+            </div>
+
+            <hr />
+            <button id="btnRegister"
+                    type="button"
+                    class="btn btn-primary pull-right">
+                Register
+            </button>
+        </form>
+
+    </div> <!-- div#formContainer end -->
+    <!-- Local jQuery JS file-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+
+    <!-- CDN Link to Bootstrap JS file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Because the script we write uses jQuery, it must come after the jQuery CDN Link -->
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            console.log("jQuery is ready!");
+
+            $("#btnRegister").on("click", registerUser);
+        })
+
+        //this function grabs the typed values of the user and assigns each to a var
+        function registerUser()
+        {
+            //the jQuery .prop() function is used on the selected checkbox element
+            //to see if it's checked. will return either true or false to variable
+            var isChecked = $("#agree").prop("checked");
+
+            if (isChecked)
+            {
+                //user variable captures the returned object from the getUserObject() function
+                var user = getUserObject();
+
+                //console log the user object to double check the read values
+                console.log("User object:", user);
+
+                //user object variable as function parameter
+                showPreview(user);
+
+                resetForm();
+            }
+            else
+            {
+                alert("You must agree to the Terms & Conditions to register!");
+            }
+        };
+
+        function getUserObject()
+        {
+            //read values from form, define user object 
+            //literal and its properties and then return it
+            return {
+                name: $("#name").val()
+                , email: $("#email").val()
+                , password: $("#password").val()
+            };
+        }
+
+        function showPreview(banana)
+        {
+            //writing user property values to DOM
+            $("#nameLanding").text(banana.name);
+            $("#emailLanding").text(banana.email);
+            $("#passwordLanding").text(banana.password);
+
+            //then show the preview pane
+            $("#preview").fadeToggle();
+        }
+
+        function resetForm()
+        {
+            $("#name, #email, #password").val("");
+
+            //setter version of .prop() to reset checkbox
+            $("#agree").prop("checked", false);
+        }
+    </script>
+</body>
+</html>

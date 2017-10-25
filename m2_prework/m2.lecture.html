@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Forms</title>
+    <meta charset="utf-8" />
+
+    <!-- CDN Link for Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style type="text/css">
+        #formContainer{
+            background-color: #ffb4b4;
+            padding: 50px;
+            height: 500px;
+        }
+
+        #resultsContainer{
+            background-color: lightgray;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="formContainer" class="col-md-6">
+		<!-- Modified Form from BootStrap's docs page: https://getbootstrap.com/docs/3.3/css/#forms -->
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword">Password</label>
+                <input type="password" 
+                       class="form-control" 
+                       id="exampleInputPassword" 
+                       placeholder="Password">
+            </div>
+			<div class="form-group">
+                <label for="exampleTextInput">Name</label>
+				<!-- Personal preference: stack element attributes for readability -->
+                <input type="text" 
+					   class="form-control" 
+					   id="exampleTextInput" 
+					   placeholder="Any text works here...">
+            </div>
+			<div class="form-group">
+                <label for="exampleSelectOption">Select</label>
+                <select class="form-control" id="exampleSelectOption">
+                    <option selected value="true">I'm Option 1</option>
+					<option value="false">I'm Option 2</option>
+				</select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+			<!-- button type button can take other html elements as their labels (like icons <i>) -->
+            <button type="button" class="btn btn-info">Button</button>
+
+			<!-- Input Type Buttons only take string as their label text-->
+            <input type="button" class="btn btn-danger" value="I'm the button text!"/>
+
+            <!-- Button Wired up to our Function -->
+            <button id="btnShowResults" type="button" class="btn btn-success pull-right">I DO SOMETHING!</button>
+        </form>
+    </div>
+    <div id="resultsContainer" class="col-md-6">
+
+    </div>
+
+
+
+
+    <!-- Local jQuery JS file-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+
+    <!-- CDN Link to Bootstrap JS file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Because the script we write uses jQuery, it must come after the jQuery CDN Link -->
+	<script type="text/javascript">
+        $(document).ready(function ()
+        {
+            //Our signal that jQuery is loaded and the 
+            //document is ready for manipulation
+            console.log("jQuery is ready");
+
+            $("#btnShowResults").on("click", copyValues);   
+        })
+
+        //this function grabs the typed values of the user
+        //and assigns each to a var
+        var copyValues = function () {                          
+            var email = $("#exampleInputEmail").val();          
+            var password = $("#exampleInputPassword").val();
+            var name = $("#exampleTextInput").val();
+            var option = $("#exampleSelectOption").val();
+            var userInput = name + ", " + email + ", " + password + ", " + option;
+            $("#resultsContainer").html("<h1>" + userInput + "</h1>");
+            $("#exampleInputEmail, #exampleInputPassword, #exampleTextInput").val("")
+        };
+
+	</script>
+</body>
+</html>

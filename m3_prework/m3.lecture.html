@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Meeting 3 Extended Forms Lecture</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style type="text/css">
+        #formContainer {
+            background-color: lightgray;
+            /*clockwise: top | right | middle| left*/
+            padding: 20px 50px 50px 50px;
+        }
+
+        /*A very specific CSS selector*/
+        h2.text-center.text-primary {
+            margin-top: 0px;
+        }
+
+        #preview {
+            color: white;
+            min-height: 300px;
+            padding: 20px;
+            display: none;
+        }
+
+        .changed-from-event{
+            color: pink;
+            background-color: aqua !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Documentation on Bootstrap's grid system: https://getbootstrap.com/docs/3.3/examples/grid/ -->
+    <div id="preview" class="col-md-12 bg-primary">
+        <h1>Preview:</h1>
+
+        <!-- h3 tags inherit text-center from parent div -->
+        <div class="text-center">
+            <h3>Name:</h3><span id="nameLanding"></span>
+            <h3>Email:</h3><span id="emailLanding"></span>
+            <h3>Password:</h3><span id="passwordLanding"></span>
+        </div>
+    </div>
+
+    <div id="formContainer" class="col-md-6 col-md-offset-3">
+
+        <h2 class="text-center text-primary">Extended Forms Lecture</h2>
+
+        <!-- Modified Form from BootStrap's docs page: https://getbootstrap.com/docs/3.3/css/#forms -->
+        <form id="formRegister">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input id="email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Email..." />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password"
+                       type="password"
+					   required
+                       class="form-control"
+                       placeholder="Password..." />
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name"
+                       type="text"
+                       class="form-control"
+                       placeholder="Full name..." />
+            </div>
+			<div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" 
+						  rows="5"
+						  class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input id="agree"
+                       type="checkbox"
+                       name="termsAccepted"
+                       value="true"> I agree with the Terms & Conditions.
+            </div>
+
+			<a href="https://www.google.com/">Link to Google!</a>
+
+            <hr />
+            <button id="btnRegister"
+                    type="submit"
+                    class="btn btn-primary pull-right">
+                Register
+            </button>
+			<button id="btnReset"
+                    type="reset"
+                    class="btn btn-warning pull-right">
+                Reset
+            </button>
+			<button id="btnSubmit"
+                    type="submit"
+                    class="btn btn-success pull-right">
+                Submit Button!
+            </button>
+        </form>
+
+    </div> <!-- div#formContainer end -->
+    <!-- Local jQuery JS file-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+
+    <!-- CDN Link to Bootstrap JS file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Because the script we write uses jQuery, it must come after the jQuery CDN Link -->
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            console.log("jQuery is ready!");
+
+            $("#btnRegister").on("click", registerUser);
+
+			//"click" event fires our function that prevent default behavior
+        	$("#btnSubmit").on("click", preventDefault);
+        	$("a").on("click", preventDefault);
+
+        	//fire changeOnEvent() on "mouseover" event for the formContainer div
+            $("#formContainer").on("mouseover", changeOnEvent);
+        })
+
+        //this function grabs the typed values of the user and assigns each to a var
+        function registerUser(event)
+        {
+        	event.preventDefault();
+
+            //the jQuery .prop() function is used on the selected checkbox element
+            //to see if it's checked. will return either true or false to variable
+            var isChecked = $("#agree").prop("checked");
+
+            if (isChecked)
+            {
+                //user variable captures the returned object from the getUserObject() function
+                var user = getUserObject();
+
+                //console log the user object to double check the read values
+                console.log("User object:", user);
+
+                //user object variable as function parameter
+                showPreview(user);
+
+                resetForm();
+            }
+            else
+            {
+                alert("You must agree to the Terms & Conditions to register!");
+            }
+        };
+
+        function getUserObject()
+        {
+            //read values from form, define user object 
+            //literal and its properties and then return it
+            return {
+                name: $("#name").val()
+                , email: $("#email").val()
+                , password: $("#password").val()
+            };
+        }
+
+        function showPreview(banana)
+        {
+            //writing user property values to DOM
+            $("#nameLanding").text(banana.name);
+            $("#emailLanding").text(banana.email);
+            $("#passwordLanding").text(banana.password);
+
+            //then show the preview pane
+            $("#preview").fadeToggle();
+        }
+
+        function resetForm()
+        {
+            $("#name, #email, #password").val("");
+
+            //setter version of .prop() to reset checkbox
+            $("#agree").prop("checked", false);
+        }
+
+        function changeOnEvent()
+        {
+            var hasClass = $("#formContainer").hasClass("changed-from-event"); //return true or false
+
+            if (hasClass)
+            {
+                $("#formContainer").removeClass("changed-from-event");
+            }
+            else
+            {
+                $("#formContainer").addClass("changed-from-event");
+            }
+        }
+
+        function preventDefault(event)
+        {
+        	event.preventDefault();
+        }
+    </script>
+</body>
+</html>
