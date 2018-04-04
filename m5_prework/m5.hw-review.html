@@ -1,0 +1,289 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Meeting 5 - Blog Tab 2 HW Review</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		li.active {
+			font-weight: bolder;
+			text-decoration: underline;
+		}
+
+		.comment .comment {
+			margin-left: 40px;
+		}
+	</style>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://sabio.la/"><img class="img-responsive img-circle navbar-brand" src="https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/93/s200/sabio-la-logo.png"></a>
+				<a class="navbar-brand" href="#">Sabio Full Stack Training</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="..\m3_prework\m3.homework.html">1) Post Input</a></li>
+                    <li class="active"><a href="..\m5_prework\m5.hw-review.html">2) Show Hidden Comments</a></li>
+                    <li><a href="..\m6_prework\m6.hw-review.html">3) Add Comments/Replies</a></li>
+                    <li><a href="GenerateFromJSObject.html">4) Generate from JS Object</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+	<div class="container">
+
+		<div class="well">
+			<p>The Comments for this blog page are in the source of the page.</p>
+			<p>
+				<span class="label label-success label-as-badge">1</span>Your first step is to hide the comments using CSS.
+				Do not use JavaScript.
+			</p>
+			<p>
+				This is an important principle: render the page using HTML markup and CSS in the best possbile state.
+				Do not rely on JS to format your page as it should look like on start up.*
+				<em>This is sometimes unavoidable but you should be forced into this not just simply default to this convinient technique.</em>
+
+			</p>
+			<p>
+				<span class="label label-success label-as-badge">2</span>
+				Add a button or "button link" that when clicked, will reveal the comments on the page. As before, be sure to start writing your code
+				within the sabio.page.startUp function and use click handlers to do the work you need.
+
+
+
+			<p>
+				<span class="label label-warning label-as-badge">Bonus</span>
+				Have the browser scroll the page down to the the top of the comments section.
+				The title of the comments area should be scrolled
+				to so that is just about at the top of the browser screen.
+			</p>
+
+
+		</div>
+		<div class="row">
+			<div class="blog-post bg-white">
+				<h2 class="blog-post-title">The Best Blog Post Title</h2>
+				<p class="blog-post-meta">by <a href="#">gregorio@sabio.la</a></p>
+
+				<div id="lipsum">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sapien scelerisque, dictum nisi vehicula, tincidunt nunc. Quisque ut lacinia ipsum, ut fermentum nisl. Donec et volutpat lectus. Cras tincidunt imperdiet tincidunt. Mauris consequat vestibulum euismod. Phasellus velit mauris, laoreet ut lacus sagittis, ultricies dapibus arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec nulla risus, imperdiet ut urna pulvinar, cursus dignissim turpis. Curabitur cursus vehicula facilisis. Donec odio enim, blandit id cursus vel, pretium et lectus. Curabitur id eros rhoncus, bibendum sem et, ultricies magna. Suspendisse placerat semper pellentesque. Aenean varius molestie elit, at elementum neque rutrum luctus. Mauris at nisi in neque aliquam pulvinar. Aenean eu aliquet nisl.
+					</p>
+
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<input type="button" class="btn btn-primary" id="showComments" value="Show Comments" />
+			</div>
+		</div>
+		<div class="row commentsContainer bg-white">
+			<div class="comments" style="display:none">
+				<h2 class="title">There are 6 comments</h2>
+
+				<!-- comment start -->
+				<div class="comment mediaclearfix">
+					<div class="comment-avatar media-left">
+						<img src="http://placehold.it/50x50" alt="avatar">
+					</div>
+					<div class="comment-content media-body">
+						<h3 class="media-heading">Comment title</h3>
+						<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+						<div class="comment-body clearfix">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+							<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+						</div>
+					</div>
+
+					<!-- comment start -->
+					<div class="comment mediaclearfix">
+						<div class="comment-avatar media-left">
+							<img src="http://placehold.it/50x50" alt="avatar">
+						</div>
+						<div class="comment-content media-body clearfix">
+							<h3 class="media-heading">Comment title</h3>
+							<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+							<div class="comment-body">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+								<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+							</div>
+						</div>
+					</div>
+					<!-- comment end -->
+
+				</div>
+				<!-- comment end -->
+				<!-- comment start -->
+				<div class="comment mediaclearfix">
+					<div class="comment-avatar media-left">
+						<img src="http://placehold.it/50x50" alt="avatar">
+					</div>
+					<div class="comment-content media-body clearfix">
+						<h3 class="media-heading">Comment title</h3>
+						<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+						<div class="comment-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+							<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+						</div>
+					</div>
+				</div>
+				<!-- comment end -->
+				<!-- comment start -->
+				<div class="comment mediaclearfix">
+					<div class="comment-avatar media-left">
+						<img src="http://placehold.it/50x50" alt="avatar">
+					</div>
+					<div class="comment-content media-body clearfix">
+						<h3 class="media-heading">Comment title</h3>
+						<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+						<div class="comment-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+							<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+						</div>
+					</div>
+				</div>
+				<!-- comment end -->
+				<!-- comment start -->
+				<div class="comment mediaclearfix">
+					<div class="comment-avatar media-left">
+						<img src="http://placehold.it/50x50" alt="avatar">
+					</div>
+					<div class="comment-content media-body clearfix">
+						<h3 class="media-heading">Comment title</h3>
+						<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+						<div class="comment-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+							<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+						</div>
+					</div>
+				</div>
+				<!-- comment end -->
+				<!-- comment start -->
+				<div class="comment mediaclearfix">
+					<div class="comment-avatar media-left">
+						<img src="http://placehold.it/50x50" alt="avatar">
+					</div>
+					<div class="comment-content media-body clearfix">
+						<h3 class="media-heading">Comment title</h3>
+						<div class="comment-meta">By <a href="#">admin</a> | Today, 12:31</div>
+						<div class="comment-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+							<a href="#" class="btn btn-gray more pull-right"><i class="fa fa-reply"></i> Reply</a>
+						</div>
+					</div>
+				</div>
+				<!-- comment end -->
+			</div>
+
+		</div>
+
+
+
+	</div><!-- /.container -->
+	<footer class="text-center">
+		<hr />
+		This is the footer of the document. Here to take up space.
+	</footer>
+
+	<!-- ====================================================================================== -->
+	<!-- **MUST GO W/ A VERSION OF jQuery above 1.9 and below 3 for Bootstrap JS file to work** -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+	<script type="text/javascript">
+		//VARIABLE TO TRACK (our switch we flip)
+		sabio.page.areCommentsVisible = false;
+
+		//STARTUP FUNCTION
+		sabio.page.startUp = function ()
+		{
+			$("#showComments").on("click", sabio.page.handlers.btnToggleComments)
+		}
+
+		//CLICK HANDLER
+		sabio.page.handlers.btnToggleComments = function ()
+		{
+			sabio.utilities.toggleVisibility();
+
+			if (sabio.page.areCommentsVisible) //check our switch (which we manage ourselves)
+			{
+				sabio.utilities.scrollToTop();
+
+				sabio.utilities.setBtnValue("Show Comments");
+			}
+			else
+			{
+				sabio.utilities.scrollToComments();
+
+				sabio.utilities.setBtnValue("Hide Comments");
+			}
+
+			
+		}
+
+		//UTILITY FUNCTIONS
+		sabio.utilities.toggleVisibility = function ()
+		{
+			$(".comments").toggle();
+		}
+
+		sabio.utilities.scrollToTop = function ()
+		{
+			var topOfPageBody = $("body").offset().top; //returns coordinates of the "top" of that particular element
+
+			var animateOptions = {
+				scrollTop: topOfPageBody
+			};
+
+			var scrollSpeed = 2000 //speed to scroll the body of the page in ms
+
+			$("html, body").animate(animateOptions, 2000);
+
+			sabio.page.areCommentsVisible = false; //flip switch to indicate comments are now visible (so we can keep track)
+		}
+
+		sabio.utilities.scrollToComments = function ()
+		{
+			var topOfComments = $(".comments").offset().top; //returns coordinates of the "top" of that particular element
+
+			var animateOptions = {
+				scrollTop: topOfComments
+			};
+
+			var scrollSpeed = 2000 //speed to scroll the body of the page in ms
+
+			$("html, body").animate(animateOptions, 2000);
+
+			sabio.page.areCommentsVisible = true; //flip switch to indicate comments are now visible (so we can keep track)
+		}
+
+		sabio.utilities.setBtnValue = function (newBtnValue)
+		{
+			$("#showComments").prop("value", newBtnValue);
+		}
+
+	</script>
+</body>
+
+
+
+</html>

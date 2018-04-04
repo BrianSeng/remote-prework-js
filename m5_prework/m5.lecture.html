@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Meeting 5 - DOM Traversing Demo</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<style type="text/css">
+		.border {
+			border: 3px solid black;
+			padding: 10px;
+		}
+
+		div#btnContainer {
+			margin: 10px;
+		}
+
+		small {
+			color: inherit !important;
+		}
+
+		div.grandparent {
+			background-color: #55ff82;
+			min-height: 600px;
+			color: black;
+		}
+
+		div.parent {
+			background-color: #396dff;
+			height: 450px;
+			color: white;
+		}
+
+		div.child {
+			background-color: lightgray;
+			height: 300px;
+			color: black;
+		}
+
+		.subchild {
+			background-color: #ffb125;
+		}
+
+		div.surrogateParent1 {
+			background-color: #2bd8ff;
+			height: 450px;
+		}
+
+		div.surrogateParent2 {
+			background-color: #ffb125;
+			height: 450px;
+		}
+
+		.direct-child {
+			background-color: #a53fff !important;
+		}
+
+		.all-descendants {
+			background-color: #f10000 !important;
+		}
+
+		.direct-parent {
+			background-color: #ff09e3 !important;
+		}
+	</style>
+</head>
+<body>
+	<div id="btnContainer">
+		<button type="button"
+				id="btnReset"
+				class="btn btn-danger">
+			Reset Page
+		</button>
+
+		<button type="button"
+				id="btnDirectChildren"
+				class="btn btn-primary">
+			Change Direct Children Of div.grandparent
+		</button>
+
+		<button type="button"
+				id="btnAllDescendants"
+				class="btn btn-success">
+			Change All Descendants Of div.grandparent
+		</button>
+
+		<button type="button"
+				id="btnDirectParent"
+				class="btn btn-info">
+			Change Direct Parent Of span.subchild
+		</button>
+
+		<button type="button"
+				id="btnAppendTemplate"
+				class="btn btn-warning">
+			Append Template
+		</button>
+	</div>
+
+	<!-- DOM node we will be traversing -->
+	<div class="grandparent col-md-12 border">
+		<h1>div.grandparent</h1>
+		<div class="parent col-md-4 border">
+			<h2>div.parent <br /><small>(child of div.grandparent)</small></h2>
+			<div class="child col-md-6 col-md-offset-3 border">
+				<h3>div.child <br /><small>(child of div.parent)</small></h3>
+				<span class="subchild">span.subchild <br />(child of div.child)</span>
+			</div>
+		</div>
+		<div class="surrogateParent1 col-md-4 border">
+			<h2>div.surrogateParent1 <br /><small>(child of div.grandparent)</small></h2>
+		</div>
+		<div class="surrogateParent2 col-md-4 border">
+			<h2>div.surrogateParent2 <br /><small>(child of div.grandparent)</small></h2>
+		</div>
+
+		<!--HTML templates will append here -->
+	</div>
+
+	<!-- ====================================================================================== -->
+	<!-- **MUST GO W/ A VERSION OF jQuery above 1.9 and below 3 for Bootstrap JS file to work** -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<!-- CDN Link to Bootstrap JS file -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+	<script type="text/javascript">
+		//Read through https://learn.jquery.com/using-jquery-core/traversing/ for more background as to what is happening on this page
+
+		//COUNTER VARIABLE
+		sabio.page.appendCounter = 1;
+
+		//STARTUP FUNCTION
+		sabio.page.startUp = function ()
+		{
+			$("#btnReset").on("click", sabio.page.handlers.btnReset);
+
+			$("#btnDirectChildren").on("click", sabio.page.handlers.changeDirectChildren);
+
+			$("#btnAllDescendants").on("click", sabio.page.handlers.changeAllDescendants);
+
+			$("#btnDirectParent").on("click", sabio.page.handlers.changeDirectParent);
+
+			$("#btnAppendTemplate").on("click", sabio.page.handlers.appendTemplate);
+		};
+
+		//CLICK HANDLER FUNCTIONS
+		sabio.page.handlers.btnReset = function ()
+		{
+			location.reload();
+		}
+
+		sabio.page.handlers.changeDirectChildren = function ()
+		{
+			/*this function will change the background color of only the direct child nodes (divs) nested under div.grandparent
+			 *.children() only traverses 1 level deep into div.grandparent and grabs only its children elements, not the children of children
+			 *returns [div.parent, div.surrogateParent1, div.surrogateParent2] */
+			$("div.grandparent").children("div").addClass("direct-child");
+		}
+
+		sabio.page.handlers.changeAllDescendants = function ()
+		{
+			/* this function will change the background color of all descendent divs nested under div.grandparent
+			 * .find() traverses inward, as deep as necessary, to return all "div" inside div.grandparent
+			 * returns [ div.child, div.parent, div.surrogateParent1, div.surrogateParent2 ] */
+			$("div.grandparent").find("div").addClass("all-descendants");
+		}
+
+		sabio.page.handlers.changeDirectParent = function ()
+		{
+			/* this function will change the background color of the direct ancestor (parent) of span.subchild
+			 * .parent() => returns [ div.child ] */
+			$("span.subchild").parent().addClass("direct-parent");
+		}
+
+		sabio.page.handlers.appendTemplate = function ()
+		{
+			//capture the cloned html template into our variable
+			var templateClone = sabio.utilities.getTemplateClone();
+
+			//dive into the template w/ .find() to grab the text in .media-heading, alter it w/ our counter, and then set it
+			var newHeading = templateClone.find("h3.media-heading").text() + sabio.page.appendCounter;
+			templateClone.find("h3.media-heading").text(newHeading)
+			//can also do -> $(".media-heading", templateClone).text() -> to grab text from template
+
+			$("div.grandparent").append(templateClone);
+
+			//increment counter by one to use the number for next time the function fires
+			sabio.page.appendCounter++;
+		}
+
+		//UTILITY FUNCTIONS
+		sabio.utilities.getTemplateClone = function ()
+		{
+			/*select our comment template by id from below and read its html
+			 *this raw html is DOM ready and can be appended, but we wish to manipulate the template so... */
+			var rawHtml = $("#htmlTemplate").html();
+
+			/*...we select the rawHtml (the div.media html template inside our variable) variable with a 
+			 *jQuery selector turning it into a jQuery object that you're now capable of running methods on 
+			 *(in this case the .clone() function which returns a copy of our templated html) */
+			return $(rawHtml).clone();
+		}
+	</script>
+
+	<!-- HTML TEMPLATE BELOW - NOTICE IT IS CONTAINED IN A <script> TAG W/ AN ID TO SELECT-->
+	<script type="text/html" id="htmlTemplate">
+		<div class="media col-md-8 col-md-offset-2 border">
+			<div class="media-left">
+				<img src="http://placehold.it/50x50" alt="avatar">
+			</div>
+			<div class="media-body">
+				<h3 class="media-heading">Template Appended! - #</h3>
+				<div class="content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+				</div>
+			</div>
+		</div>
+	</script>
+</body>
+</html>

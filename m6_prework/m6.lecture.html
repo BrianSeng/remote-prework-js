@@ -1,0 +1,170 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Meeting 6 - Event Handling & Conditions Demo</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		#mainContainer{
+			padding: 20px;
+			height: 300px;
+		}
+		#btnContainer {
+			padding: 15px;
+			background-color: #99d7ff;
+			height: 150px;
+		}
+	</style>
+</head>
+<body>
+	<div id="mainContainer" class="col-md-12 bg-success">
+		<h1>div#mainContainer</h1>
+		<div id="btnContainer" class="col-md-6 col-md-offset-3">
+			<h2>div#btnContainer</h2>
+			<button id="btnStopProp"
+					type="button"
+					class="btn btn-primary">
+				This Button Stops Event Propagation
+			</button>
+			<button id="btnBubbleUp"
+					type="button"
+					class="btn btn-danger">
+				This Button's Event Will Bubble Up
+			</button>
+		</div>
+	</div>
+
+	<!-- ====================================================================================== -->
+	<!-- **MUST GO W/ A VERSION OF jQuery above 1.9 and below 3 for Bootstrap JS file to work** -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+	<script type="text/javascript">
+		//STARTUP FUNCTION
+		sabio.page.startUp = function ()
+		{
+			$("#mainContainer, #btnContainer").on("click", sabio.page.handlers.onContainerClick);
+
+			$("#btnStopProp").on("click", sabio.page.handlers.onBtnStopPropClick);
+
+			$("#btnBubbleUp").on("click", sabio.page.handlers.onBtnBubbleUpClick);
+
+		}
+
+		//EVENT HANDLERS
+		sabio.page.handlers.onContainerClick = function (event)
+		{
+
+			var elementId = $(this).prop("id");
+
+			console.log("Clicked Element's ID:", elementId);
+			
+			if (elementId == "btnContainer")
+			{
+				//event.stopPropagation();
+
+				console.log("'this' keyword:", this);
+
+				alert("The BUTTON Container was clicked!");
+			}
+			else
+			{
+				console.log("'this' keyword:", this);
+
+				alert("The MAIN Container was clicked!");
+			}
+		}
+
+		sabio.page.handlers.onBtnStopPropClick = function (event)
+		{
+			event.stopPropagation();
+
+			alert("This click event did not bubble up the DOM tree and trigger other events thanks to .stopPropagation()");
+		}
+
+		sabio.page.handlers.onBtnBubbleUpClick = function ()
+		{
+			alert("Bubble on up!!");
+		}
+
+		//MISC PAGE FUNCTIONS
+		// --> for more info on the 'typeof' keyword check MDN's docs: 
+		// --> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+		sabio.page.checkType = function (value)
+		{
+			var msg;
+
+			if (typeof value === "undefined")
+			{
+				msg = "OH NO! IT'S UNDEFINED!"
+			}
+			else if (typeof value === "boolean")
+			{
+				msg = "IT TRULY IS A BOOLEAN!"
+			}
+			else if (typeof value === "number")
+			{
+				msg = "ADD EM UP! IT'S A NUMBER!"
+			}
+			else if (typeof value === "string")
+			{
+				msg = "STRINGY STRING :D"
+			}
+			else if (typeof value === "function")
+			{
+				msg = "STRINGY STRING :D"
+			}
+			else if (typeof value === "object")
+			{
+				msg = "IT'S AN OBJECT! U DOWN WIT O.O.P.???"
+			}
+
+			console.log(msg);
+		}
+
+		//Truthy vs Falsey examples
+        var truthy1 = "0"    //string
+            , truthy2 = "a string"    //string
+            , truthy3 = "false"    //string
+            , truthy4 = 23    //number (data type: integer)
+            , truthy5 = []    //empty array
+            , truthy6 = {}    //empty object
+            , truthy7 = function () { } //empty function
+            , truthy8 = true;  //data type: boolean - true
+
+        var falsey1 = 0    //zero
+            , falsey2 = ""    //empty string
+            , falsey3 = null   //data type: null
+            , falsey4    //undefined
+            , falsey5 = NaN  //Not a Number
+            , falsey6 = false;  //data type: boolean - false
+
+		sabio.page.truthyCheck = function (value)
+		{
+			var msg;
+
+			if (falsey4)
+            {
+                msg = "THIS VAR WAS TRUTHY!";
+            }
+            else
+            {
+                msg = "THIS VAR WAS Falsey!";
+            }
+
+			console.log(msg);
+		}
+	</script>
+</body>
+
+
+
+</html>

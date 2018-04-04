@@ -1,0 +1,134 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Meeting 6 - Modal Demo</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+</head>
+<body>
+	<div class="col-md-6 col-md-offset-3">
+		<!-- Trigger the modal using attributes -->
+		<button type="button"
+				class="btn btn-success btn-lg"
+				data-toggle="modal"
+				data-target="#myFirstModal">
+			Open Modal Using Attributes
+		</button>
+		<button type="button"
+				class="btn btn-primary btn-lg"
+				id="btnOpenModal">
+			Open Modal Using JavaScript/jQuery
+		</button>
+	</div>
+
+	<!-- Modal (in a hidden state) to be opened using element attributes -->
+	<div id="myFirstModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button"
+							class="close"
+							data-dismiss="modal">
+						&times;
+					</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button"
+							class="btn btn-default"
+							data-dismiss="modal">
+						Close
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Modal (in a hidden state) to be opened using JavaScript/jQuery -->
+	<div class="modal fade" id="mySecondModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h3 class="modal-title">Add Your Reply</h3>
+				</div>
+				<div class="modal-body">
+					<div class="comments-form">
+						<div id="formContainer">
+							<form>
+								<div class="form-group">
+									<label class="modal-label" for="title">Comment Title</label>
+									<input type="text"
+										   class="form-control cmt-title" 
+										   placeholder="Enter your post's title here..." />
+								</div>
+								<div class="form-group">
+									<label class="modal-label" for="postEmail">Email</label>
+									<input type="email" 
+										   class="form-control cmt-email" 
+										   placeholder="Enter your email here..." />
+								</div>
+								<div class="form-group">
+									<label class="modal-label" for="postContent">Your Comment</label>
+									<textarea rows="5" cols="76" class="form-control cmt-body"></textarea>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="submit" 
+						   value="Submit Reply" 
+						   class="btn btn-success cmdAddComment"
+						   data-formid="#comment-form-reply">
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+	<!-- ====================================================================================== -->
+	<!-- **MUST GO W/ A VERSION OF jQuery above 1.9 and below 3 for Bootstrap JS file to work** -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="http://sabioapi2.azurewebsites.net/scripts/sabio.js"></script>
+
+	<script type="text/javascript">
+		//STARTUP FUNCTION
+		sabio.page.startUp = function ()
+		{
+			$("#btnOpenModal").on("click", sabio.page.handlers.openModal);
+		}
+
+		//CLICK HANDLER
+		sabio.page.handlers.openModal = function ()
+		{
+
+			$("#mySecondModal").modal("show");
+		}
+
+	</script>
+
+</body>
+
+</html>
